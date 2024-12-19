@@ -50,6 +50,29 @@ class Mapmanager:
                         self.addBlock((x, y, z0))
                     x += 1
                 y += 1
-
-
         return x,y
+    def findBlocks(self, pos):
+        blocks = self.findBlocks(pos)
+        if blocks:
+            return False
+        else:
+            return True
+
+    def findHighestEmpty(self,pos):
+        x, y, z = pos
+        z=1
+        while not self.isEsmpty(self, pos):
+            x,y,z = pos
+            new = self.findHighestEmpty(pos)
+            if new[2] <= z + 1:
+                self.addBlock(new)
+
+    def delBlock(self, position):
+        block = self.findHighestEmpty(position)
+        for block in self.findBlocks(pos):
+            block.removeNode()
+    def delBlockFrom(self, position):
+            x,y,z = self.findHighestEmpty(position)
+            pos = x,y,z -1
+            for block in self.findBlocks(pos):
+                block. removeNode()
